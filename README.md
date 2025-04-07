@@ -17,8 +17,8 @@
  - Continent
  - Latitude & Longitude
  - Timezone
- - ...and more!
- 
+ - ...and more!	
+ ---
  - 🌍 IP-based location lookup using MaxMind GeoLite2
  - ⚡ Fast response time with accurate delay reporting
  - 🔌 Plugin support via `?plugins=plugin1,plugin2` in the URL
@@ -26,8 +26,11 @@
    - `weather`: Current weather based on coordinates
    - `language`: Primary language based on country
    
-Access via GET:  
-`https://hoskes-geoapi.onrender.com/json.gp
+Access via GET: 
+```bash
+ https://hoskes-geoapi.onrender.com/json.gp
+```
+
 
 ---
 ## ✨ Example Response
@@ -44,7 +47,7 @@ Access via GET:
   "hoskes_locplugin_regionName": "England",
   "hoskes_locplugin_countryCode": "GB",
   "hoskes_locplugin_countryName": "United Kingdom",
-  "hoskes_locplugin_inEU": 0,
+  "hoskes_locplugin_inEUunion": 0,
   "hoskes_locplugin_continentCode": "EU",
   "hoskes_locplugin_continentName": "Europe",
   "hoskes_locplugin_latitude": "51.5064",
