@@ -1,118 +1,75 @@
-# 🌍 Hoskes GeoIP API
+# 📍 Hoskes LocPlugin API
 
-A **free**, **open source**, GeoPlugin-style IP geolocation API built with 💙 for the community.
+**A lightweight, open-source IP geolocation API powered by MaxMind and built for the community.**
 
-Get the location of any IP using the URL:
-
-```
-https://hoskes-geoapi.onrender.com/json.gp
-```
+🟣 **Live URL:** [https://hoskes-geoapi.onrender.com/json.gp](https://hoskes-geoapi.onrender.com/json.gp)  
+📦 **License:** MIT  
+🤝 **Open for contributions and issues**
 
 ---
 
-## 🚀 How It Works
+## 🔧 Features
 
-This API detects the **network IP** of the requester and returns detailed geographic information, including:
+- 🌍 IP-based location lookup using MaxMind GeoLite2
+- ⚡ Fast response time with accurate delay reporting
+- 🔌 Plugin support via `?plugins=plugin1,plugin2` in the URL
+- ✅ Currently supported plugins:
+  - `weather`: Current weather based on coordinates
+  - `language`: Primary language based on country
 
-- City
-- Region
-- Country
-- Continent
-- Latitude & Longitude
-- Timezone
-- Currency
-- ...and more!
+---
 
-Example response:
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/your-username/hoskes-geoapi.git
+cd hoskes-geoapi
+npm install
+```
+
+Make sure you have `GeoLite2-City.mmdb` in the project root. You can get it from [MaxMind's website](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data).
+
+```bash
+node index.js
+```
+
+Access via:  
+`http://localhost:3000/json.gp?plugins=weather,language`
+
+---
+
+## 🔌 Plugins System
+
+Plugins run only if requested via query string:
+
+```bash
+/json.gp?plugins=weather,language
+```
+
+Each plugin enriches the JSON response. Plugins are modular and stored in `/plugins`.
+
+---
+
+## ✨ Example Response
+
 ```json
 {
-   "hoskes_locplugin_request":"212.84.160.87",
-   "hoskes_locplugin_status":200,
-   "hoskes_locplugin_delay":"0.31ms",
-   "hoskes_locplugin_credit":"Returned data includes GeoLite2 data created by MaxMind, available from <a href='https://www.maxmind.com'>https://www.maxmind.com</a>.",
-   "hoskes_locplugin_city":"Nottingham",
-   "hoskes_locplugin_region":"England",
-   "hoskes_locplugin_regionCode":"ENG",
-   "hoskes_locplugin_regionName":"England",
-   "hoskes_locplugin_countryCode":"GB",
-   "hoskes_locplugin_countryName":"United Kingdom",
-   "hoskes_locplugin_inEU":0,
-   "hoskes_locplugin_continentCode":"EU",
-   "hoskes_locplugin_continentName":"Europe",
-   "hoskes_locplugin_latitude":"52.9922",
-   "hoskes_locplugin_longitude":"-1.233",
-   "hoskes_locplugin_locationAccuracyRadius":"50",
-   "hoskes_locplugin_timezone":"Europe/London",
-   "hoskes_locplugin_currencyCode":"BRL"
+  "hoskes_locplugin_request": "179.172.163.15",
+  "hoskes_locplugin_status": 200,
+  "hoskes_locplugin_delay": "3.35ms",
+  "hoskes_locplugin_city": "Belo Horizonte",
+  "hoskes_locplugin_countryName": "Brazil",
+  "hoskes_locplugin_weather": "30°C ☀️",
+  "hoskes_locplugin_language": "Portuguese"
 }
 ```
 
 ---
 
-## 🧠 Built With
-
-- Node.js + Express
-- MaxMind GeoLite2 database
-- `request-ip` for IP extraction
-
----
-
-## 🛠️ How to Use
-
-1. Clone this repo:
-   ```bash
-   git clone https://github.com/matheushoske/hoskes.geoapi.git
-   ```
-
-2. Download the [GeoLite2-City.mmdb](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) and replace it in the project root (optional [For updated data]).
-
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-4. Run locally:
-   ```bash
-   node index.js
-   ```
-
-5. Visit:
-   ```
-   http://localhost:3000/json.gp
-   ```
-
----
-
 ## 🤝 Contributing
 
-We welcome all kinds of contributions — bug fixes, improvements, documentation, and more.
+- Submit issues freely
+- Create pull requests at any time
+- Add your own plugin in `/plugins` and PR!
 
-- 👉 **Open an Issue** if you find bugs or have ideas.
-- 👉 **Make a Pull Request** if you’d like to contribute code.
-
-This project exists **for the community** and is powered by contributors like you!
-
----
-
-## 🌐 Live Endpoint
-
-**Try it now**:
-```
-https://hoskes-geoapi.onrender.com/json.gp
-```
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## 🙏 Credit
-
-- Geo data provided by [MaxMind GeoLite2](https://www.maxmind.com).
-
----
-
-Made with ❤️ by [@matheushoske](https://github.com/matheushoske)
+This project was made for the community 💜

@@ -61,8 +61,7 @@ app.get('/json.gp', async (req, res) => {
         hoskes_locplugin_latitude: location.latitude?.toString() || "",
         hoskes_locplugin_longitude: location.longitude?.toString() || "",
         hoskes_locplugin_locationAccuracyRadius: location.accuracy_radius?.toString() || "",
-        hoskes_locplugin_timezone: location.time_zone || "",
-        hoskes_locplugin_currencyCode: geo.country?.currency?.code || "BRL"
+        hoskes_locplugin_timezone: location.time_zone || ""
     };
 
     const requestedPlugins = (req.query.plugins || '').split(',').map(p => p.trim().toLowerCase());
