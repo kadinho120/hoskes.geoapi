@@ -29,7 +29,7 @@ app.get('/json.gp', async (req, res) => {
 
     let ip = req.clientIp;
     if (ip === '::1' || ip === '127.0.0.1') {
-        ip = '178.238.10.15'; // fallback IP for local testing
+        ip = '89.163.154.134'; // fallback IP for local testing
     }
 
     if (!lookup) {
@@ -55,7 +55,7 @@ app.get('/json.gp', async (req, res) => {
         hoskes_locplugin_regionName: subdivision.names?.en || "",
         hoskes_locplugin_countryCode: geo.country?.iso_code || "",
         hoskes_locplugin_countryName: geo.country?.names?.en || "",
-        hoskes_locplugin_inEU: geo.continent?.code === "EU" ? 1 : 0,
+        hoskes_locplugin_inEUunion: geo.country?.is_in_european_union ? 1 : 0,
         hoskes_locplugin_continentCode: geo.continent?.code || "",
         hoskes_locplugin_continentName: geo.continent?.names?.en || "",
         hoskes_locplugin_latitude: location.latitude?.toString() || "",
