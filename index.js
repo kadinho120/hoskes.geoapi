@@ -2,6 +2,7 @@ const express = require('express');
 const requestIp = require('request-ip');
 const maxmind = require('maxmind');
 const path = require('path');
+const axios = require('axios');
 const { performance } = require('perf_hooks');
 const fs = require('fs');
 
@@ -23,6 +24,22 @@ fs.readdirSync(pluginDir).forEach(file => {
     const name = file.split('.')[0];
     plugins[name] = require(path.join(pluginDir, file));
 });
+
+//--------- RENDER BYPASS (YOU CAN IGNORE) ---------
+const PING_URL = 'https://location-render-bypass.onrender.com/render-alive';
+app.get('/render-alive', async (req, res) => {
+  await pingRemoteServer();
+  res.send('Ping sent');
+});
+async function pingRemoteServer() {
+  try {
+    const response = await axios.get(PING_URL);
+    console.log(`[${new Date().toISOString()}] Ping successful: ${response.data}`);
+  } catch (error) {
+    console.error(`[${new Date().toISOString()}] Ping failed:`, error.message);
+  }
+}
+//--------- END - RENDER BYPASS (YOU CAN IGNORE) ---------
 
 app.get('/json.gp', async (req, res) => {
     const start = performance.now();
