@@ -3,6 +3,7 @@ const requestIp = require('request-ip');
 const maxmind = require('maxmind');
 const path = require('path');
 const { performance } = require('perf_hooks');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +14,14 @@ app.use(requestIp.mw());
 let lookup;
 maxmind.open(path.join(__dirname, 'GeoLite2-City.mmdb')).then((cityLookup) => {
     lookup = cityLookup;
+});
+
+// Load plugins dynamically from ./plugins
+const plugins = {};
+const pluginDir = path.join(__dirname, 'plugins');
+fs.readdirSync(pluginDir).forEach(file => {
+    const name = file.split('.')[0];
+    plugins[name] = require(path.join(pluginDir, file));
 });
 
 app.get('/json.gp', async (req, res) => {
@@ -34,12 +43,11 @@ app.get('/json.gp', async (req, res) => {
 
     const location = geo.location || {};
     const subdivision = geo.subdivisions?.[0] || {};
-    const delay = (performance.now() - start).toFixed(2) + 'ms';
 
     const response = {
         hoskes_locplugin_request: ip,
         hoskes_locplugin_status: 200,
-        hoskes_locplugin_delay: delay,
+        hoskes_locplugin_delay: '', // calculated later
         hoskes_locplugin_credit: "Returned data includes GeoLite2 data created by MaxMind, available from <a href='https://www.maxmind.com'>https://www.maxmind.com</a>.",
         hoskes_locplugin_city: geo.city?.names?.en || "",
         hoskes_locplugin_region: subdivision.names?.en || "",
@@ -57,6 +65,20 @@ app.get('/json.gp', async (req, res) => {
         hoskes_locplugin_currencyCode: geo.country?.currency?.code || "BRL"
     };
 
+    const requestedPlugins = (req.query.plugins || '').split(',').map(p => p.trim().toLowerCase());
+
+    for (const pluginName of requestedPlugins) {
+        if (plugins[pluginName]) {
+            const pluginData = await plugins[pluginName](ip, {
+                latitude: location.latitude,
+                longitude: location.longitude,
+                country_code: geo.country?.iso_code || ""
+            });
+            Object.assign(response, pluginData);
+        }
+    }
+
+    response.hoskes_locplugin_delay = (performance.now() - start).toFixed(2) + 'ms';
     res.json(response);
 });
 
