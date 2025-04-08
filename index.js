@@ -5,9 +5,16 @@ const path = require('path');
 const axios = require('axios');
 const { performance } = require('perf_hooks');
 const fs = require('fs');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Enable CORS for all routes with explicit configuration
+app.use(cors({
+    origin: '*', // Allow all origins
+    methods: ['PUT', 'GET', 'HEAD', 'POST', 'DELETE', 'OPTIONS'], // Allow HTTP methods
+}));
 
 app.use(requestIp.mw());
 
