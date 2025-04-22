@@ -2,7 +2,7 @@
 
 **A **free**, **lightweight**, **open source**, GeoPlugin-style IP geolocation API built with 💙 for the community.**
 
-🟣 **Live URL:** [https://hoskes-geoapi.onrender.com/json.gp](https://hoskes-geoapi.onrender.com/json.gp)  
+🟣 **Live URL:** [https://geoapi-hoskes.onrender.com/json.gp](https://geoapi-hoskes.onrender.com/json.gp)  
 📦 **License:** MIT  
 🤝 **Open for contributions and issues**
 
