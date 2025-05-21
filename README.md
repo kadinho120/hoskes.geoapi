@@ -28,7 +28,7 @@
    
 Access via GET: 
 ```bash
- [https://hoskes-geoapi.onrender.com/json.gp](https://geoapi-hoskes.onrender.com/json.gp)
+ https://geoapi-hoskes.onrender.com/json.gp
 ```
 
 
