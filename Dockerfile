@@ -11,10 +11,6 @@ WORKDIR /app
 RUN curl -L -o /tmp/geoipupdate.tar.gz "https://github.com/maxmind/geoipupdate/releases/download/v6.1.0/geoipupdate_6.1.0_linux_amd64.tar.gz" && \
     tar -zxvf /tmp/geoipupdate.tar.gz -C /usr/local/bin --strip-components=1
 
-# Copia os arquivos de dependências do Go
-COPY go.mod go.sum ./
-RUN go mod download
-
 # Copia o código-fonte da aplicação
 COPY . .
 
