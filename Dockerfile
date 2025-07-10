@@ -19,6 +19,7 @@ ARG MAXMIND_ACCOUNT_ID
 ARG MAXMIND_LICENSE_KEY
 
 # Cria o arquivo de configuração do geoipupdate com as credenciais
+RUN mkdir -p /usr/local/etc
 RUN echo -e "AccountID ${MAXMIND_ACCOUNT_ID}\nLicenseKey ${MAXMIND_LICENSE_KEY}\nEditionIDs GeoLite2-City\nDatabaseDirectory /app/db" > /usr/local/etc/GeoIP.conf
 
 # Executa o geoipupdate para baixar o banco de dados
