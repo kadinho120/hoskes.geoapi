@@ -27,7 +27,7 @@ RUN echo -e "AccountID ${MAXMIND_ACCOUNT_ID}\nLicenseKey ${MAXMIND_LICENSE_KEY}\
 RUN /usr/local/bin/geoipupdate -v
 
 # Compila a aplicação Go. O executável final será 'geoapi'
-RUN CGO_ENABLED=0 GOOS=linux GO111MODULE=off go build -o geoapi .
+RUN CGO_ENABLED=0 GOOS=linux GO111MODULE=off go build -o geoapi ./cmd/geoapi
 
 # ---
 
